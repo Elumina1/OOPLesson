@@ -4,7 +4,7 @@ using System.Text;
 
 namespace WorkSpace18._02._26
 {
-    public class Product
+    public class sum
     {
         public int Id { get; set; }
 

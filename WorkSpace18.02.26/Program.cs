@@ -8,14 +8,14 @@ class Program
         vasya.AddBalance(1000000000);
         Console.WriteLine(vasya);
 
-        var milk = new Product()
+        var milk = new sum()
         {
             Title = "Молоко 3,5%",
             Brand = "Вятушка",
             Price = 90
         };
 
-        var bread = new Product()
+        var bread = new sum()
         {
             Title = "Черный бородинский",
             Brand = "ООО москва",
@@ -50,5 +50,6 @@ class Program
         Console.WriteLine(order);
 
         //todo подумать над вариантом оплаты и реализацией 
+        //todo вычитать сумму платежа с баланса клиента
     }
 }

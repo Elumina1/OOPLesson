@@ -31,9 +31,9 @@ namespace WorkSpace18._02._26
         /// Товар
         /// </summary>
         //public Product Product { get; set; }
-        private Product _product;
+        private sum _product;
 
-        public Product Product
+        public sum Product
         {
             get 
             { 
