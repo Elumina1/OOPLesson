@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Mail;
 using System.Text;
 
 namespace WorkSpace18._02._26
 {
-    class Order
+    public class Order
     {
         public int Id { get; set; }
 
@@ -19,6 +20,17 @@ namespace WorkSpace18._02._26
         //public decimal TotalSum { get; set; }
         private decimal _totalSum;
 
+        public decimal GetTotalSum()
+        {
+            var discount = 0m;
+            if (DiscountSystem != null)
+            {
+                discount = DiscountSystem.GetDiscount(this);
+            }
+
+            return TotalSum - discount;
+        }
+
         public decimal TotalSum
         {
             get 
@@ -32,14 +44,23 @@ namespace WorkSpace18._02._26
             }
         }
 
-
         /// <summary>
         /// Способ оплаты
         /// </summary>
-        public Payment Payment { get; set; }
+        public IPaymentService PaymentService { get; set; }
         public override string ToString()
         {
-            return $"Заказ {Number} от {Date} для {Client.Name} на сумму {TotalSum}";
+            var discountDiscription = "(без скидки)";
+            var orderSum = GetTotalSum();
+            if(DiscountSystem != null)
+            {
+                discountDiscription = DiscountSystem.GetDiscountDescription();
+            }
+            
+            return $"Заказ {Number} от {Date} для {Client.Name} на сумму {TotalSum}.\n применена скидка {discountDiscription} сумма со скидкой {orderSum}";
         }
+
+        public IDiscountSystem DiscountSystem { get; set; }
+
     }
 }

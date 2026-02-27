@@ -1,15 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WorkSpace18._02._26
+﻿namespace WorkSpace18._02._26
 {
-    internal class FSP
+    /// <summary>
+    /// система быстрых платежей
+    /// </summary>
+    public class FSP : IPaymentService
     {
+        public string GetPaymentDiscription()
+        {
+            return "система быстрых платежей";
+        }
 
-
-
+        public bool Pay(Client client, double sum)
+        {
+            return client.Balance >= sum;
+        }
     }
 }

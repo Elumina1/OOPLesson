@@ -8,8 +8,8 @@ namespace WorkSpace18._02._26
 {
     public interface IDiscountSystem
     {
-        string GetDiscountDiscription();
+        string GetDiscountDescription();
 
-        bool Discount(Client client, sum product);
+        decimal GetDiscount(Order order);
     }
 }

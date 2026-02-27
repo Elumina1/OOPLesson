@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace WorkSpace18._02._26
 {
-    internal class IPaymentService
+    public interface IPaymentService
     {
+
+        string GetPaymentDiscription();
+
+        bool Pay(Client client, double sum);
+        
+
     }
 }

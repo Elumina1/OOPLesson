@@ -6,16 +6,15 @@ using System.Threading.Tasks;
 
 namespace WorkSpace18._02._26
 {
-    public class RegularGuest : IDiscountSystem
+    public class PersistentCustomerDiscount : IDiscountSystem
     {
         public decimal GetDiscount(Order order)
         {
-            return order.TotalSum - 1000;
+            return order.TotalSum * 0.05m;
         }
-
         public string GetDiscountDescription()
         {
-            return "Скидка постоянного гостя";
+            return "Скидка постоянного клиента";
         }
     }
 }

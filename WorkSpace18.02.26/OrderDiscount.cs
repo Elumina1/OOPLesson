@@ -6,7 +6,16 @@ using System.Threading.Tasks;
 
 namespace WorkSpace18._02._26
 {
-    internal class OrderDiscount
+    internal class OrderDiscount : IDiscountSystem
     {
+        public decimal GetDiscount(Order order)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetDiscountDescription()
+        {
+            return "Скидка на товар";
+        }
     }
 }

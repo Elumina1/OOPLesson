@@ -7,6 +7,7 @@ class Program
         var vasya = new Client("Вася", "uweullar@gmail.com", "89000000000", "Ленина 100");
         vasya.AddBalance(1000000000);
         Console.WriteLine(vasya);
+        var vasyaDiscount = new PersistentCustomerDiscount();
 
         var milk = new sum()
         {
@@ -39,7 +40,8 @@ class Program
             {
                 milkItem, 
                 breadItem
-            }
+            },
+            DiscountSystem = vasyaDiscount
         };
 
 
