@@ -1,41 +1,88 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WorkSpace18._02._26
+﻿namespace WorkSpace18._02._26
 {
     public class OrderBuilder
     {
         private Order order;
+        private static int _nextOrderNumber = 1;
+
         public OrderBuilder()
         {
             order = new Order()
             {
                 Date = DateTime.Now,
-                Number = "1",
+                Number = (_nextOrderNumber++).ToString(),
+                Items = new List<OrderItem>()
             };
-
         }
 
         public OrderBuilder ForCustomer(Client client)
         {
-            //todo проверка что пришел клиент (не пустой)
+            if (client == null)
+            {
+                throw new ArgumentNullException(nameof(client));
+            }
             order.Client = client;
+
             return this;
         }
 
         public OrderBuilder WithDiscount(IDiscountSystem discountSystem)
         {
-            //todo
+            if (discountSystem == null)
+            {
+                throw new ArgumentNullException(nameof(discountSystem));
+            }
+
             order.DiscountSystem = discountSystem;
+
+            return this;
+        }
+
+        public OrderBuilder WithPaymentKind(IPaymentService paymentService)
+        {
+            if (paymentService == null)
+            {
+                throw new ArgumentNullException(nameof(paymentService));
+            }
+
+            order.PaymentService = paymentService;
+
+            return this;
+        }
+
+        public OrderBuilder WithItems(List<OrderItem> items)
+        {
+            if (items == null)
+            {
+                throw new ArgumentNullException(nameof(items));
+            }
+
+            foreach (var item in items)
+            {
+                order.Items.Add(item);
+            }
+
             return this;
         }
 
         public Order Build()
         {
-            //todo проверить валидность всего заказа
+            // проверка валидности заказа
+            if (order.Client == null)
+            {
+                throw new InvalidOperationException("Заказ должен содержать клиента.");
+            }
+
+            if (order.Items == null || order.Items.Count == 0)
+            {
+                throw new InvalidOperationException("Заказ должен содержать хотя бы один элемент.");
+            }
+
+            if (order.Items.Any(i => i == null))
+            {
+                throw new InvalidOperationException("Список предметов пустой.");
+            }
+
             return order;
         }
     }
