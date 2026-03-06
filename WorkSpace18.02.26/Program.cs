@@ -1,9 +1,25 @@
-﻿using System;
+﻿using LinqToDB;
+using Npgsql;
+
 namespace WorkSpace18._02._26;
 class Program
 {
+    public static void RunDbConnection()
+    {
+        var options = new DataOptions()
+        .UsePostgreSQL(@"Host=localhost;Database=Shop;Username=Lutsenko;Password=1111");
+
+        using var db = new DbOrders(options);
+        var products = db.Products.ToList();
+        foreach (var item in products)
+        {
+            Console.WriteLine(item);
+        }
+    }
     static void Main(string[] args)
     {
+        RunDbConnection();
+        return;
         var vasya = new Client("Вася", "uweullar@gmail.com", "89000000000", "Ленина 100");
         vasya.AddBalance(1000000000);
         Console.WriteLine(vasya);
@@ -24,7 +40,7 @@ class Program
         };
 
         var automobil = new Automobile
-        { 
+        {
             Title = "Kalina",
             Brand = "Lada",
             Price = 150000,
@@ -52,7 +68,7 @@ class Program
 
         var audiFactory = new AutomobileFactory(/*передать какие то параметры */);
         var blackAudi = audiFactory.Create();
-        var milkFactory = new DairyFactory( );
+        var milkFactory = new DairyFactory();
         var milk5 = milkFactory.Create();
 
 
