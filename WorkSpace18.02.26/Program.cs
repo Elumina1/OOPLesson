@@ -52,6 +52,9 @@ class Program
 
         var audiFactory = new AutomobileFactory(/*передать какие то параметры */);
         var blackAudi = audiFactory.Create();
+        var milkFactory = new DairyFactory( );
+        var milk5 = milkFactory.Create();
+
 
         Console.WriteLine(blackAudi);
         return;
