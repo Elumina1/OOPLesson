@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using LinqToDB.Mapping;
 
-namespace WorkSpace18._02._26
+namespace WorkSpace18._02._26.Models
 {
     public class Client
     {
-
+        [PrimaryKey, Identity]
+        public int Id { get; set; }
         public string Name { get; private set; }
         public double Balance { get; private set; }
         public string Email { get; private set; }
@@ -82,6 +81,6 @@ namespace WorkSpace18._02._26
 
         }
 
-
+    
     }
 }

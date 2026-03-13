@@ -1,4 +1,7 @@
-﻿namespace WorkSpace18._02._26
+﻿using WorkSpace18._02._26.Abstractions;
+using WorkSpace18._02._26.Models;
+
+namespace WorkSpace18._02._26.Services
 {
     /// <summary>
     /// система быстрых платежей

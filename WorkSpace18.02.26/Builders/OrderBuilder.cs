@@ -1,4 +1,7 @@
-﻿namespace WorkSpace18._02._26
+﻿using WorkSpace18._02._26.Abstractions;
+using WorkSpace18._02._26.Models;
+
+namespace WorkSpace18._02._26.Builders
 {
     public class OrderBuilder
     {
@@ -68,7 +71,7 @@
         public Order Build()
         {
             // проверка валидности заказа
-            if (order.Client == null)
+            /*if (order.Client == null)
             {
                 throw new InvalidOperationException("Заказ должен содержать клиента.");
             }
@@ -81,7 +84,7 @@
             if (order.Items.Any(i => i == null))
             {
                 throw new InvalidOperationException("Список предметов пустой.");
-            }
+            }*/
 
             return order;
         }

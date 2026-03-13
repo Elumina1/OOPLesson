@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using WorkSpace18._02._26.Abstractions;
+using WorkSpace18._02._26.Models;
 
-namespace WorkSpace18._02._26
+namespace WorkSpace18._02._26.Services
 {
     public class RegularGuest : IDiscountSystem
     {

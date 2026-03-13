@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using System.Text;
-using LinqToDB.Data;
-using LinqToDB.Mapping;
+﻿using LinqToDB.Mapping;
 
-namespace WorkSpace18._02._26
+namespace WorkSpace18._02._26.Models
 {
     [Table ("Product")]
     public class Product
@@ -27,10 +22,22 @@ namespace WorkSpace18._02._26
         /// </summary>
         [Column, NotNull]
         public string Brand { get; set; }
+        
         /// <summary>
         /// Цена единицы товара
         /// </summary>
         [Column, NotNull]
         public decimal Price { get; set; }
+
+        public override string ToString()
+        {
+            return $"Name: {Title}, {Price}";
+        }
     }
 }
+
+ /*
+  create table products ();
+  
+  */
+

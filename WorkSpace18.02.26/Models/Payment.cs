@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using WorkSpace18._02._26.Enums;
 
-namespace WorkSpace18._02._26
+namespace WorkSpace18._02._26.Models
 {
     public class Payment
     {

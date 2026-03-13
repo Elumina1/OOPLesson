@@ -1,21 +1,94 @@
 ﻿using LinqToDB;
-using Npgsql;
+using WorkSpace18._02._26.Builders;
+using WorkSpace18._02._26.Data;
+using WorkSpace18._02._26.Models;
+using WorkSpace18._02._26.Services;
 
 namespace WorkSpace18._02._26;
+
 class Program
 {
     public static void RunDbConnection()
     {
         var options = new DataOptions()
-        .UsePostgreSQL(@"Host=localhost;Database=Shop;Username=Lutsenko;Password=1111");
+            .UsePostgreSQL(@"Server=localhost;Port=5432;DataBase=shop; User Id=re;Password=postgres; Include Error Detail=True");
 
         using var db = new DbOrders(options);
-        var products = db.Products.ToList();
-        foreach (var item in products)
+        
+        // Product
+        db.Products.Insert(() => new Product
+        {
+            Title = "New Prodcut 1",
+            Article = "15",
+            Brand = "Brand",
+            Price = 666
+        });
+        
+        var products = db.Products
+            .ToList();
+        
+        ShowItems(products, "Products");
+        
+        // Client
+        db.Clients.Insert(() => 
+            new Client(
+                "name",
+                "email",
+                "74734742",
+                "fwfww")
+        );
+
+        var client = db.Clients
+            .FirstOrDefault(x => x.Id == 1);
+        
+        /*ShowItems(clients, "Clients");*/
+        
+        // Order
+        var milkFactory = new DairyFactory();
+        var milk = milkFactory.Create();
+        
+        var milkItem = new OrderItem() 
+        {
+            Amount = 3, 
+            Product = milk
+        };
+        
+        milk.Price = 180;
+        milkItem.Amount = 2;
+        var vasyaDiscount = new PersistentCustomerDiscount();
+        
+        
+            
+        db.Orders.Insert(() => new Order());
+        
+        var orders = db.Orders
+            .ToList();
+        
+        ShowItems(orders);
+        
+        /*
+        // Order
+        var orderItems = db.OrderItems
+            .LoadWith(request => request.Product)
+            .ToList();
+        
+        ShowItems(orderItems);
+        
+        */
+    }
+
+    private static void ShowItems<T>(
+        IEnumerable<T> items,
+        string title = "Items:")
+    {
+        Console.WriteLine($"{title}: \n");
+        
+        foreach (var item in items)
         {
             Console.WriteLine(item);
         }
     }
+    
     static void Main(string[] args)
     {
         RunDbConnection();

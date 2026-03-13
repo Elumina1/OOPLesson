@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
+using LinqToDB.Mapping;
 
-namespace WorkSpace18._02._26
+namespace WorkSpace18._02._26.Models
 {
     public class OrderItem
     {
-
+        [PrimaryKey, Identity]
+        public int Id { get; set; }
+        
         /// <summary>
         /// Количество товара
         /// </summary>
@@ -26,13 +27,15 @@ namespace WorkSpace18._02._26
             }
         }
 
-
         /// <summary>
         /// Товар
         /// </summary>
-        //public Product Product { get; set; }
         private Product _product;
 
+        [LinqToDB.Mapping.Association(
+            ThisKey = "ProductId", 
+            OtherKey = "Id", 
+            CanBeNull = false)]
         public Product Product
         {
             get 
@@ -45,6 +48,9 @@ namespace WorkSpace18._02._26
                 UpdateSum();
             }
         }
+        
+        [Required] 
+        public int ProductId { get; set; }
 
         /// <summary>
         /// Общая сумма
@@ -59,6 +65,11 @@ namespace WorkSpace18._02._26
             }
             
             Sum = Amount * Product.Price;
+        }
+
+        public override string ToString()
+        {
+            return $"Amount: {Amount} Sum: {Sum}; \nProduct (Link): {Product}";
         }
     }
 }
